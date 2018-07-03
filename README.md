@@ -3,7 +3,7 @@ USTC iGEM Software 2018 Back-end Test Project
 
 ## 目标
 
-你的目标是使用 GitHub **fork 本仓库**，编写一个简单的 Django 程序，并且**修改本文件**完成文末的简单报告，完整之后**发起 Pull Request**。
+你的目标是使用 GitHub **fork 本仓库**，编写一个简单的 Django 程序，并且**修改本文件**完成文末的简单报告，完成之后**发起 Pull Request**。
 
 截止日期是：2018 年 7 月 8 日 23:00。
 
