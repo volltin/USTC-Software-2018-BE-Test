@@ -183,5 +183,8 @@ venv.bak/
 ### Python Patch ###
 .venv/
 
+### user define
+*.png
+.DS_Store
 
 # End of https://www.gitignore.io/api/django,python,pycharm
