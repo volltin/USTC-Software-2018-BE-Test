@@ -108,5 +108,6 @@ def logout_view(request):
     return HttpResponse(json.dumps(ret),content_type="application/json")
 
 
-
+def chart_view(request):
+    
 
