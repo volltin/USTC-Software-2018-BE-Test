@@ -12,7 +12,7 @@ json_reg = {
     "err_msg":"",
 }
 
-def regis(request):
+def regis_view(request):
     '''
     注册页面
     '''
@@ -34,7 +34,7 @@ def regis(request):
             ret["err_msg"] = "用户名已经存在."
     return HttpResponse(json.dumps(ret),content_type="application/json")
 
-def login(request):
+def login_view(request):
     '''
     登陆
     '''
@@ -62,7 +62,10 @@ def login(request):
         ret["err_msg"] = "用户名或密码错误"
     return HttpResponse(json.dumps(ret),content_type="application/json")
 
-def profile(request):
+def profile_view(request):
+    '''
+    用户页面
+    '''
     ret = json_reg.copy()
     username = request.session.get("login","")
     if username != "":
@@ -72,6 +75,8 @@ def profile(request):
         ret["err_msg"] = "用户未登录"
     return HttpResponse(json.dumps(ret),content_type="application/json")
 
+def logout_view(request):
+    pass
 
 
 
