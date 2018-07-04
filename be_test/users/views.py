@@ -47,7 +47,7 @@ def login(request):
     except Exception as e:
         user = None
     if user:
-        request.session['login'] = True
+        request.session['login'] = username
         request.session.set_expiry(3600 * login_time)   #设置登陆时长
 
         if request.META.get('HTTP_X_FORWARDED_FOR',None):
