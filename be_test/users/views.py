@@ -31,7 +31,7 @@ def regis_view(request):
         ret["err_code"] = -2,
         ret["err_msg"] = "Password is too long"
     else:
-        user,flag = Users.objects.get_or_create(name=username,password=password)
+        user,flag = Users.objects.get_or_create(name=username,password=password)    # 注册，由于作者偷懒，并未对密码加密
         if flag == False:
             ret["err_code"] = -3,
             ret["err_msg"] = "The username has been used"
@@ -117,7 +117,12 @@ def chart_view(request):
     '''
     ret = json_reg.copy()
     y_str = request.POST.get("number","[]")
-    y_axis = json.loads(y_str)
+    try:
+        y_axis = json.loads(y_str)
+    except :
+        ret['err_code'] = -2
+        ret["err_msg"] = "JSON decode failed."
+        return HttpResponse(json.dumps(ret),content_type="application/json")
     x_axis = range(len(y_axis))
 
     if len(y_axis) == 0:
