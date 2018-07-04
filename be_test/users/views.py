@@ -26,15 +26,15 @@ def regis_view(request):
 
     if len(username) > 30:
         ret["err_code"] = -1,
-        ret["err_msg"] = "用户名太长."
+        ret["err_msg"] = "Username is too long."
     elif len(password) > 50:
         ret["err_code"] = -2,
-        ret["err_msg"] = "密码太长."
+        ret["err_msg"] = "Password is too long"
     else:
         user,flag = Users.objects.get_or_create(name=username,password=password)
         if flag == False:
             ret["err_code"] = -3,
-            ret["err_msg"] = "用户名已经存在."
+            ret["err_msg"] = "The username has been used"
     return HttpResponse(json.dumps(ret),content_type="application/json")
 
 def login_view(request):
@@ -64,7 +64,7 @@ def login_view(request):
         user.save()
     else:
         ret["err_code"] = -1
-        ret["err_msg"] = "用户名或密码错误"
+        ret["err_msg"] = "Login failed"
     return HttpResponse(json.dumps(ret),content_type="application/json")
 
 def profile_view(request):
@@ -77,7 +77,7 @@ def profile_view(request):
         ret['username'] = username
     else:
         ret['err_code'] = -1
-        ret["err_msg"] = "用户未登录"
+        ret["err_msg"] = "User is not login yet."
     return HttpResponse(json.dumps(ret),content_type="application/json")
 
 def logout_view(request):
@@ -92,7 +92,7 @@ def logout_view(request):
             user = Users.objects.get(name=username)
         except Exception:
             ret['err_code'] = -2
-            ret["err_msg"] = "用户名非法"
+            ret["err_msg"] = "Username illegal."
         
         request.session["login"] = ""
         request.set_expiry = -1
@@ -107,22 +107,26 @@ def logout_view(request):
 
     else:
         ret['err_code'] = -1
-        ret["err_msg"] = "用户未登录"
+        ret["err_msg"] = "User is not login yet."
     return HttpResponse(json.dumps(ret),content_type="application/json")
 
 
 def chart_view(request):
+    '''
+    生成图标
+    '''
     ret = json_reg.copy()
     y_str = request.POST.get("number","[]")
     y_axis = json.loads(y_str)
     x_axis = range(len(y_axis))
+
     if len(y_axis) == 0:
         ret['err_code'] = -1
-        ret["err_msg"] = "没有找到数据"
+        ret["err_msg"] = "Cann't find data."
         return HttpResponse(json.dumps(ret),content_type="application/json")
 
     else:
-        filename = str(hash(repr(y_str))) + ".png"
+        filename = str(hash(repr(y_str))) + ".png"  # hash 如果重名则不重复画图
         file = os.path.join("./images/",filename)
         if not os.path.exists(file):
             plt.plot(x_axis, y_axis)
@@ -133,7 +137,7 @@ def chart_view(request):
         response =StreamingHttpResponse(file_body)  
         response['Content-Type']='image/png'  
         response['Content-Disposition']='attachment;filename="'+filename+'"'  
-        return response  
+        return response   
 
         
     
