@@ -1,8 +1,11 @@
 import json
 import datetime
+import numpy as np
+import matplotlib.pyplot as plt
+import os
 
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,StreamingHttpResponse
 from users.models import Users 
 
 # Create your views here.
@@ -109,5 +112,32 @@ def logout_view(request):
 
 
 def chart_view(request):
+    ret = json_reg.copy()
+    y_str = request.POST.get("number","[]")
+    y_axis = json.loads(y_str)
+    x_axis = range(len(y_axis))
+    if len(y_axis) == 0:
+        ret['err_code'] = -1
+        ret["err_msg"] = "没有找到数据"
+        return HttpResponse(json.dumps(ret),content_type="application/json")
+
+    else:
+        filename = str(hash(repr(y_str))) + ".png"
+        file = os.path.join("./images/",filename)
+        if not os.path.exists(file):
+            plt.plot(x_axis, y_axis)
+            plt.savefig(file)
+            plt.close()
+        
+        file_body = open(file,'rb')  
+        response =StreamingHttpResponse(file_body)  
+        response['Content-Type']='image/png'  
+        response['Content-Disposition']='attachment;filename="'+filename+'"'  
+        return response  
+
+        
     
+
+
+
 
