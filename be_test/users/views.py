@@ -62,10 +62,15 @@ def login(request):
         ret["err_msg"] = "用户名或密码错误"
     return HttpResponse(json.dumps(ret),content_type="application/json")
 
-
-
-
-
+def profile(request):
+    ret = json_reg.copy()
+    username = request.session.get("login","")
+    if username != "":
+        ret['username'] = username
+    else:
+        ret['err_code'] = -1
+        ret["err_msg"] = "用户未登录"
+    return HttpResponse(json.dumps(ret),content_type="application/json")
 
 
 
