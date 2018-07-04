@@ -241,7 +241,7 @@ python3 manage.py runserver
 ### 错误码约定
 
 |网址|  err_code  | err_msg |   描述   |
-|-------|------------- |:-------------:| -----:|
+|-------|------------- |:-------------:| -----|
 | register| 0  | ""    |  注册成功  |
 | register| -1  | "Username is too long."    | 用户名太长  |
 | register| -2  | "Password is too long"    | 密码太长  |
