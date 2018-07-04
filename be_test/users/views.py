@@ -55,8 +55,10 @@ def login_view(request):
         else:
             ip = request.META['REMOTE_ADDR']
         
+        user.login_time = login_time # 更改登陆时长
         user.update_ip = ip         # 获取ip
         user.update_date = datetime.datetime.now()  # 获取时间
+        user.save()
     else:
         ret["err_code"] = -1
         ret["err_msg"] = "用户名或密码错误"
@@ -76,7 +78,34 @@ def profile_view(request):
     return HttpResponse(json.dumps(ret),content_type="application/json")
 
 def logout_view(request):
-    pass
+    '''
+    登出
+    '''
+    ret = json_reg.copy()
+    username = request.session.get("login","")
+    if username != "":
+
+        try:
+            user = Users.objects.get(name=username)
+        except Exception:
+            ret['err_code'] = -2
+            ret["err_msg"] = "用户名非法"
+        
+        request.session["login"] = ""
+        request.set_expiry = -1
+        if request.META.get('HTTP_X_FORWARDED_FOR',None):
+            ip =  request.META['HTTP_X_FORWARDED_FOR']
+        else:
+            ip = request.META['REMOTE_ADDR']
+        
+        user.update_ip = ip         # 获取ip
+        user.update_date = datetime.datetime.now()  # 获取时间
+        user.save()
+
+    else:
+        ret['err_code'] = -1
+        ret["err_msg"] = "用户未登录"
+    return HttpResponse(json.dumps(ret),content_type="application/json")
 
 
 
