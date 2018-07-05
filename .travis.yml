@@ -3,5 +3,4 @@ python:
   - "3.5"
   - "3.6"
 install: pip install -q -r requirements.txt
-before_script: sh -c 'cd be_test; python manage.py makemigrations && python manage.py migrate --run-syncdb'
 script: sh -c 'cd be_test; python manage.py test'
