@@ -1,6 +1,7 @@
 from django.contrib import auth
 from django.http.response import JsonResponse
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 from ipware import get_client_ip
 from user import errors
@@ -9,6 +10,7 @@ from user import utils
 
 
 @require_POST
+@csrf_exempt
 def register(request):
     if request.user.is_authenticated:
         return JsonResponse(errors.LOGGED_IN)
@@ -41,6 +43,7 @@ def register(request):
 
 
 @require_POST
+@csrf_exempt
 def login(request):
     if request.user.is_authenticated:
         return JsonResponse(errors.LOGGED_IN)
