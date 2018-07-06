@@ -33,7 +33,11 @@ def simple(request):
     except ValueError:
         return JsonResponse(errors.INVALID_DATA)
 
-    if width <= 0 or height <= 0:
+    try:
+        (width, height) = map(int, (width, height))
+        if width <= 0 or height <= 0:
+            return JsonResponse(errors.INVALID_SIZE)
+    except ValueError:
         return JsonResponse(errors.INVALID_SIZE)
 
     # Check if already cached
