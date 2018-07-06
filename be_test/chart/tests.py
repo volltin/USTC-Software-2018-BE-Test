@@ -5,7 +5,7 @@ from chart import errors
 class SimpleChartTest(TestCase):
     def test_simple1(self):
         c = Client()
-        rep = c.post('/chart/simple', {'data': '1 2'})
+        rep = c.post('/chart/simple', {'data': '5 1.3 4 1.0 3.5', 'width': '3', 'height': '2'})
         with open('chart/test1.png', 'rb') as f:
             data = b''.join(rep.streaming_content)
             self.assertEqual(data, f.read())

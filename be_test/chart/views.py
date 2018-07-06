@@ -49,9 +49,10 @@ def simple(request):
         return FileResponse(buffer, content_type='image/png')
     else:
         # If not, generate image data
+        xs = list(range(1, 1+len(ys)))
         fig = plt.figure(figsize=(width, height), dpi=dpi)
         ax = fig.add_subplot(111)
-        ax.plot(ys)
+        ax.plot(xs, ys)
         buffer = BytesIO()
         plt.savefig(buffer, format="png")
         buffer.seek(0)
