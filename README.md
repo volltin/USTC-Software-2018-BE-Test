@@ -1,5 +1,6 @@
 # USTC-Software-2018-BE-Test
 USTC iGEM Software 2018 Back-end Test Project
+[![Build Status](https://travis-ci.com/ksqsf/USTC-Software-2018-BE-Test.svg?branch=master)](https://travis-ci.com/ksqsf/USTC-Software-2018-BE-Test)
 
 ## 目标
 
