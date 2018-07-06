@@ -212,7 +212,7 @@ POST /chart/simple
 
 ### 注意事项
 
-* 调用 user API 需注意 CSRF
+* 安全性：不防范 CSRF 攻击，需保证 API 不暴露到外部。
 
 ### 错误码约定
 
