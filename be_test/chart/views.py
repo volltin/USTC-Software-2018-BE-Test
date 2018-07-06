@@ -1,10 +1,13 @@
 from django.http.response import FileResponse, JsonResponse
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
-from matplotlib import pyplot as plt
 from chart import errors
 from io import BytesIO
 from expiringdict import ExpiringDict
+
+import matplotlib
+matplotlib.use('Agg')
+from matplotlib import pyplot as plt
 
 
 _cache = ExpiringDict(max_len=100, max_age_seconds=60)
