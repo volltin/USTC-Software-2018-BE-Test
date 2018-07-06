@@ -1,5 +1,6 @@
 # USTC-Software-2018-BE-Test
 USTC iGEM Software 2018 Back-end Test Project
+[![Build Status](https://travis-ci.com/ksqsf/USTC-Software-2018-BE-Test.svg?branch=master)](https://travis-ci.com/ksqsf/USTC-Software-2018-BE-Test)
 
 ## 目标
 
@@ -202,13 +203,35 @@ POST /chart/simple
 
 ### 调用方法
 
-（坑）
+| API            | 方法 |
+|----------------|------|
+| /user/register | POST |
+| /user/login    | POST |
+| /user/logout   | GET  |
+| /user/profile  | GET  |
+| /chart/simple  | POST |
 
 ### 注意事项
 
-（坑）
+* 安全性：不防范 CSRF 攻击，需保证 API 不暴露到外部。
 
 ### 错误码约定
 
-（坑）
+| 错误码 | 意义         |    来源 |
+|--------|:------------:|--------:|
+| 0      | 操作成功     | be_test |
+| 1      | 未实现       | be_test |
+| 2      | 参数不足     | be_test |
+| 3      | 已登录       | be_test |
+| 4      | 未登录       | be_test |
+| 100    | 无效登录信息 |    user |
+| 101    | 用户已存在   |    user |
+| 102    | 用户不存在   |    user |
+| 110    | 用户名太长   |    user |
+| 111    | 密码太长     |    user |
+| 112    | 密码太简单   |    user |
+| 113    | 非法用户名   |    user |
+| 114    | 非法密码     |    user |
+| 200    | 无效数据     |   chart |
+| 201    | 无效大小     |   chart |
 
