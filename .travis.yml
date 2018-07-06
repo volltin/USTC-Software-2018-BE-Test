@@ -2,5 +2,7 @@ language: python
 python:
   - "3.5"
   - "3.6"
+services: postgresql
 install: pip install -q -r requirements.txt
+before_script: psql -c 'CREATE DATABASE be_test_db;' -U postgres
 script: sh -c 'cd be_test; python manage.py test'
