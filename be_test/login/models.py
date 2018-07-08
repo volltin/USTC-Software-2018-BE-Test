@@ -7,4 +7,4 @@ class User(models.Model):
     password = models.CharField(max_length = 256)
 
 def __str__(self):
-    return self.name
+    return self.username
