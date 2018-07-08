@@ -2,6 +2,7 @@
 # Created by https://www.gitignore.io/api/django,python,pycharm
 
 ### Django ###
+.idea/
 *.log
 *.pot
 *.pyc
@@ -11,7 +12,7 @@ db.sqlite3
 media
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
-# in your Git repository. Update and uncomment the following line accordingly.
+# in your Git repository. Update and uncomment the following line accordingly.0
 # <django-project-name>/staticfiles/
 
 ### PyCharm ###
