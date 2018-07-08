@@ -25,7 +25,7 @@ SECRET_KEY = 'b=ayd8l2(!$56*r=g2n3*9b2h@rj85zgxwqz%evoh9$j38yvt6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'login',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'be_test.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,3 +119,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# ----------------
+# edit by roar
+# 继承AbstractUser 创立新的用户表
+# ----------------
+AUTH_USER_MODEL = 'login.UserMain'
+
+LOGIN_URL = 'user/login'
