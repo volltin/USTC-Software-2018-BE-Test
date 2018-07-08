@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+    <form action="{% url 'chart:Plot' %}" method="post">
+        {% csrf_token %}
+        {% for i in  array%}
+            <label for="dot{{i}}">dot {{i}}</label>
+            <input type="number" name="dot{{i}}" id="dot{{i}}" /><br/>
+        {% endfor %}
+        <label for="width">width</label>
+        <input type="number" name="width" id="width"><br />
+        <label for="height">height</label>
+        <input type="number" name="height" id="height"><br />
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

@@ -1,2 +1,3 @@
+matplotlib
 Django==2.0.7
 pytz==2018.5

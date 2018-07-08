@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+    <form action="{% url 'user:Login' %}" method="post">
+        {% csrf_token %}
+        <label for="username">username</label>
+        <input type="text" name="username" id="username"/><br />
+        <label for="password">username</label>
+        <input type="text" name="password" id="password"/><br />
+        <input type="submit" value="Login"/><br />
+    </form>
+    <form action="{% url 'user:Register' %}" method="post">
+        {% csrf_token %}
+        <label for="username">username</label>
+        <input type="text" name="username" id="username"/><br />
+        <label for="password">username</label>
+        <input type="text" name="password" id="password"/><br />
+        <input type="submit" value="Register"/><br />
+    </form>
+</body>
+</html>
