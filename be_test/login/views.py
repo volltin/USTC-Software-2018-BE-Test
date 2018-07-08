@@ -23,7 +23,7 @@ def login(request):
         ret["err_msg"] = "重复登录！"
     if request.method == "POST":
         login_form = forms.UserForm(request.POST)
-        message = "请检查填写的内容！"
+        # message = "请检查填写的内容！"
         if login_form.is_vlaid():
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']

@@ -202,13 +202,52 @@ POST /chart/simple
 
 ### 调用方法
 
-（坑）
+1. 安装需要的依赖，依赖的包在`requirements.txt`内，使用如下命令安装：
+
+   ```shell
+   pip3 install requirements.txt
+   ```
+
+2. 创建记录和数据表：
+
+   ```
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+
+   ​
+
+3. 启动服务器：
+
+   ```shell
+   python manage.py runserver
+   ```
+
+   ​
 
 ### 注意事项
 
-（坑）
+1. Django可以在服务器运行时指定端口号，默认为8000
+
+2. 为了测试需要，`settings.py`中设置：
+
+   1. `DEBUG = True`;
+   2. csrf验证关闭，即把：`django.middleware.csrf.CsrfViewMiddleware`一行注释掉。
+
+   项目安全性要求更高时应打开csrf验证。
 
 ### 错误码约定
 
-（坑）
+| 网址     | err_code | err_msg                  | 描述               |
+| -------- | -------- | ------------------------ | ------------------ |
+| login    | 0        | ""                       | 登陆成功           |
+| login    | -1       | "密码不正确！"           | 密码错误           |
+| login    | -2       | "用户不存在！"           | 用户名未注册       |
+| login    | -3       | "重复登录！"             | 在登陆状态下登陆   |
+| logout   | 0        | ""                       | 登出成功           |
+| logout   | -1       | "请先登录！"             | 在登出状态下登出   |
+| register | 0        | ""                       | 注册成功           |
+| register | -1       | "登陆状态时不允许注册！" | 登陆状态时无法注册 |
+| register | -2       | "两次输入的密码不同！"   | 注册时密码输入错误 |
+| register | -3       | "用户名已存在！"         | 用户名已被注册     |
 
