@@ -20,11 +20,11 @@ def login(request):
     ret = json_reg.copy()
     if request.session.get('is_login', None):
         ret["err_code"] = -3
-        ret["err_msg"] = "重复登录！"
+        ret["err_msg"] = "Please logout before login"
     if request.method == "POST":
         login_form = forms.UserForm(request.POST)
         # message = "请检查填写的内容！"
-        if login_form.is_vlaid():
+        if login_form.is_valid():
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
             try:
@@ -33,15 +33,15 @@ def login(request):
                     #return redirect('/index/')
                     request.session['is_login'] = True
                     request.session['user_id'] = user.id
-                    request.session['user_name'] = user.name
+                    request.session['user_name'] = user.username
                     ret["err_code"] = 0
                     ret["err_msg"] = ""
                 else:
                     ret["err_code"] = -1
-                    ret["err_msg"] = "密码不正确！"
+                    ret["err_msg"] = "Password does not correst"
             except:
                 ret["err_code"] = -2
-                ret["err_msg"] = "用户不存在！"
+                ret["err_msg"] = "Username does not exist"
         return HttpResponse(json.dumps(ret), content_type="application/json")
     login_form = forms.UserForm()
     return HttpResponse(json.dumps(ret), content_type="application/json")
@@ -50,7 +50,7 @@ def logout(request):
     ret = json_reg.copy()
     if not request.session.get('is_login', None):
         ret["err_code"] = -1
-        ret["err_msg"] = "请先登录！"
+        ret["err_msg"] = "Please login before you logout"
         return HttpResponse(json.dumps(ret), content_type="application/json")
     request.session.flush()
     ret["err_code"] = 0
@@ -61,7 +61,7 @@ def register(request):
     ret = json_reg.copy()
     if request.session.get('is_login', None):
         ret["err_code"] = -1
-        ret["err_msg"] = "登陆状态时不允许注册！"
+        ret["err_msg"] = "Please logout before you register"
         return HttpResponse(json.dumps(ret), content_type="application/json")
     if request.method == "POST":
         register_form = forms.RegisterForm(request.POST)
@@ -71,13 +71,13 @@ def register(request):
             password2 = register_form.cleaned_data['password2']
             if password1 != password2:
                 ret["err_code"] = -2
-                ret["err_msg"] = "两次输入的密码不同！"
+                ret["err_msg"] = "Passwords are different"
                 return HttpResponse(json.dumps(ret), content_type="application/json")
             else:
                 same_name_user = models.User.objects.filter(username=username)
                 if same_name_user:
                     ret["err_code"] = -3
-                    ret["err_msg"] = "用户名已存在！"
+                    ret["err_msg"] = "Username has been used"
                     return HttpResponse(json.dumps(ret), content_type="application/json")
                 #用户名合法且密码输入正确
                 new_user = models.User()
@@ -96,5 +96,5 @@ def profile(request):
         ret["username"] = request.session.get('is_login', None)
     else:
         ret["err_code"] = -1
-        ret["err_msg"] = "用户未登录！"
+        ret["err_msg"] = "Please login to get your profile"
     return HttpResponse(json.dumps(ret), content_type="application/json")
