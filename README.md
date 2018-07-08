@@ -202,7 +202,16 @@ POST /chart/simple
 
 ### 调用方法
 
-（坑）
++   /user/login 登陆功能
+    +   向 /user/login 用 post 方法传递字典{username: \$(username), password: \$(password)}
++   /user/register 注册功能
+    +    向 /user/register 用 post 方法传递字典{username: \$(username), password: \$(password)}
++   /user/profile 查看详细信息功能
+    +   直接跳转到 /user/profile
++   /user/logout 登出功能
+    +   直接跳转到 /user/logout
++   /chart/simple 画图功能
+    +   向 /chart/simple 用 post 方法传递字典 {array: $(array[])}
 
 ### 注意事项
 
@@ -210,5 +219,13 @@ POST /chart/simple
 
 ### 错误码约定
 
-（坑）
+| err_code |                  err_msg                  |         出现的场所          |
+| :------: | :---------------------------------------: | :-------------------------: |
+|    0     |                    空                     |                             |
+|    1     | Username or password should not be empty. | /user/login和/user/register |
+|    2     |   This username is already registered.    |       /user/register        |
+|    3     |         Username does not exist.          |         /user/login         |
+|    4     |              Wrong password.              |         /user/login         |
+|    5     |          You are not logged in.           |        /user/profile        |
+|    6     |           User does not exist.            |        /user/logout         |
 
