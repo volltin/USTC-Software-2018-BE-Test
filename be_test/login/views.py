@@ -89,3 +89,12 @@ def register(request):
                 return HttpResponse(json.dumps(ret), content_type="application/json")
     register_form = forms.RegisterForm()
     return HttpResponse(json.dumps(ret), content_type="application/json")
+
+def profile(request):
+    ret = json_reg.copy()
+    if request.session.get('is_login', None):
+        ret["username"] = request.session.get('is_login', None)
+    else:
+        ret["err_code"] = -1
+        ret["err_msg"] = "用户未登录！"
+    return HttpResponse(json.dumps(ret), content_type="application/json")
