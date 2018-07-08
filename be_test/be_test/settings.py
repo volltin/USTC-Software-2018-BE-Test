@@ -126,6 +126,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # edit by roar
 # 继承AbstractUser 创立新的用户表
 # ----------------
-AUTH_USER_MODEL = 'user.UserMain'
+AUTH_USER_MODEL = 'login.UserMain'
 
 LOGIN_URL = 'user/login'
