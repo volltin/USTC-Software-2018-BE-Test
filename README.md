@@ -15,13 +15,13 @@ be_test注册app'user'，完成功能有用户注册register、登录login、个
 
 注册、登录请求类型为POST，查看信息、登出请求类型为GET
 
-对于注册，传入方法为/user/register 附加POST参数{'username':example_name,'password':example_password}
+对于注册，传入方法为/user/register/ 附加POST参数{'username':example_name,'password':example_password}
 
-对于登录，传入方法为/user/login    附加POST参数{'username':example_name,'password':example_password}
+对于登录，传入方法为/user/login/    附加POST参数{'username':example_name,'password':example_password}
 
-查看信息，传入方法为/user/profile/?username=example_name,查询成功会返回错误码0及username
+查看信息，传入/user/profile/，查询成功会返回错误码0及username
 
-登出传入方法为/user/logout/?username=example_name
+登出，传入/user/logout/，删除成功会返回错误码0
 
 ### 注意事项
 
@@ -39,7 +39,7 @@ User中用户名为name，与输入时的"username"不同
 
 返回的错误码对应的信息为：
 
-返回码 | 错误信息 | 解释
+错误码 | 错误信息 | 解释
  ---- | ---- | ---- 
 0 | null | 正常返回
 1 | User Exists | 注册错误，用户已存在
