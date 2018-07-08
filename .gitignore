@@ -184,4 +184,23 @@ venv.bak/
 .venv/
 
 
+bin
+include
+lib
+*.db
+.idea
+*.json
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+dist
+build
+*.sqlite
+*.sqlite3
+*env*
+secrets_zh.py
+supervisord.conf
+
+
 # End of https://www.gitignore.io/api/django,python,pycharm
