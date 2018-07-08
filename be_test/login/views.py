@@ -35,7 +35,7 @@ def login(request):
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.name
                     ret["err_code"] = 0
-                    ret["err_msg"] = "登陆成功！"
+                    ret["err_msg"] = ""
                 else:
                     ret["err_code"] = -1
                     ret["err_msg"] = "密码不正确！"
@@ -54,7 +54,7 @@ def logout(request):
         return HttpResponse(json.dumps(ret), content_type="application/json")
     request.session.flush()
     ret["err_code"] = 0
-    ret["err_msg"] = "登出成功！"
+    ret["err_msg"] = ""
     return HttpResponse(json.dumps(ret), content_type="application/json")
 
 def register(request):
@@ -85,7 +85,7 @@ def register(request):
                 new_user.password = password1
                 new_user.save()
                 ret["err_code"] = 0
-                ret["err_msg"] = "注册成功！"
+                ret["err_msg"] = ""
                 return HttpResponse(json.dumps(ret), content_type="application/json")
     register_form = forms.RegisterForm()
     return HttpResponse(json.dumps(ret), content_type="application/json")
