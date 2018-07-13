@@ -1,14 +1,14 @@
 Django==2.0.7
 pytz==2018.5
-���÷�����
-be_test ���� ������������ python manage.py runserver ���ɿ�ʼ��̨����
-������ 127.0.0.1:8000 �˿ڽ��в��� ��url���urls.py
-ע�����
-�ڵ��û�ͼ����ʱ������nΪx����y�����ĸ�������������n��x,y����ʽΪx1,x2...y1,y2...
-Ŀǰ��ͼ������һ��bug �����һ��ͼ֮����޷��ٴλ�ͼ�� Ӧ�����Ҳ���̫���Ľ����й� �����޸���...
-������Լ����
-err_code=0 Ϊû�д���
-err_code=1 ��ʾ�д���
-err_msg ÿ����������ϸ��ע
-���⣺login֮�󷵻ص�json�����л��е�¼ʱ���ip
-logoutʱҲ���¼�ǳ���ʱ���ip ���Ǵ�����û�з��� ��Ҫʱ���Ե���
+调用方法：
+be_test 界面 在命令行输入 python manage.py runserver 即可开始后台服务
+可以在 127.0.0.1:8000 端口进行测试 各url详见urls.py
+注意事项：
+在调用画图功能时，参数n为x或者y变量的个数，接着输入n个x,y，形式为x1,x2...y1,y2...
+目前画图功能有一个bug 画完第一张图之后就无法再次画图了 应该与我不是太懂的进程有关 正在修复中...
+错误码约定：
+err_code=0 为没有错误
+err_code=1 表示有错误
+err_msg 每个错误都有详细标注
+另外：login之后返回的json数据中还有登录时间和ip
+logout时也会记录登出的时间和ip 但是此数据没有返回 需要时可以调用
